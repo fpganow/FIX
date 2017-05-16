@@ -33,18 +33,21 @@ class FixMessage:
         messageType = MessageType.Heartbeat
         sender = "JOHN"
         target = "NASDAQ"
-        self.header = { }
-        self.header[FixHeader.BeginString] = "FIX.{}.{}".format(major, minor)
-        self.header[FixHeader.BodyLength] = ""
-        self.header[FixHeader.MsgType] = ""
-        self.header[FixHeader.SenderCompID] = sender
-        self.header[FixHeader.TargetCompID] = target
+        self.header = [ ]
+        self.header.append("{}=FIX.{}.{}".format(FixHeader.BeginString, major, minor))
+        self.header.append( 0xA )
+        #self.header[FixHeader.BodyLength] = ""
+        #self.header[FixHeader.MsgType] = ""
+        #self.header[FixHeader.SenderCompID] = sender
+        #self.header[FixHeader.TargetCompID] = target
 
     def getRawBytes(self):
         rawBytes = bytearray()
 
-        rawBytes.append(0x00)
-        rawBytes.append(0x01)
+        print("self.header: {}".format(self.header[0]))
+        rawBytes.extend(map(ord, self.header[0] ))
+        #rawBytes.append(0x00)
+        #rawBytes.append(0x01)
 
         return rawBytes
 
