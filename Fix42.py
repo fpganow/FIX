@@ -34,8 +34,8 @@ class FixMessage:
         sender = "JOHN"
         target = "NASDAQ"
         self.header = [ ]
-        self.header.append("{}=FIX.{}.{}".format(FixHeader.BeginString, major, minor))
-        self.header.append( 0xA )
+        self.header.append("{}=FIX.{}.{}\n".format(FixHeader.BeginString, major, minor))
+        #self.header.append( 0xA )
         #self.header[FixHeader.BodyLength] = ""
         #self.header[FixHeader.MsgType] = ""
         #self.header[FixHeader.SenderCompID] = sender
@@ -46,8 +46,7 @@ class FixMessage:
 
         print("self.header: {}".format(self.header[0]))
         rawBytes.extend(map(ord, self.header[0] ))
-        #rawBytes.append(0x00)
-        #rawBytes.append(0x01)
+        rawBytes.append(0x0A)
 
         return rawBytes
 
