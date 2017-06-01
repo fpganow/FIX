@@ -18,7 +18,10 @@ class Create_Fix42_Messages_Test(unittest.TestCase):
 
         # THEN
         self.assertEqual( rawBytes[0:10], "8=FIX.4.1\n".encode('ascii') )
-        #self.assertEqual( rawBytes[10:], "9=\n".encode('ascii') )
+        self.assertEqual( rawBytes[10:16], "9=100\n".encode('ascii') )
+
+        splitArray = rawBytes.split("\n")
+        print("len: {}".format( len(splitArray) ))
 
 if __name__ == "__main__":
     unittest.main()

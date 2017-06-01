@@ -32,14 +32,19 @@ class FixMessage:
 
         def getRawBytes(self, messageLen):
             rawBytes = bytearray()
-            print("BeginString={}".format(self.BeginString))
-            print("major={}".format(self.major))
-            print("minor={}".format(self.minor))
-            beginString = "{}=FIX.{}.{}\n".format(self.BeginString, self.major, self.minor)
+            #print("BeginString={}".format(self.BeginString))
+            #print("major={}".format(self.major))
+            #print("minor={}".format(self.minor))
+            beginString = "{}=FIX.{}.{}\n".format(self.BeginString,
+                                                  self.major,
+                                                  self.minor)
             rawBytes.extend( beginString.encode('ascii') )
 
             messageLength = "{}={}\n".format( self.BodyLength, messageLen )
             rawBytes.extend( messageLength.encode('ascii') )
+
+            msgType = "{}={}\n".format( self.MsgType, self.messageType )
+            rawBytes.extend( msgType.encode('ascii') )
 
             return rawBytes
 

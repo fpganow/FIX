@@ -8,16 +8,16 @@ nnoremap  
 nnoremap  
 vmap gx <Plug>NetrwBrowseXVis
 nmap gx <Plug>NetrwBrowseX
-omap <F1> :!!
-vmap <F1> :!!
-omap <F3> :wa!
+nnoremap <F2> :!make all
 vmap <F3> :wa!
+omap <F3> :wa!
+vmap <F1> :!!
+omap <F1> :!!
 vnoremap <silent> <Plug>NetrwBrowseXVis :call netrw#BrowseXVis()
 nnoremap <silent> <Plug>NetrwBrowseX :call netrw#BrowseX(expand((exists("g:netrw_gx")? g:netrw_gx : '<cfile>')),netrw#CheckIfRemote())
 map <F5> :!tmux send-keys -t right './Fix42Tests.py' Enter
 map <F4> :!ts './parsetItch.py' 
 nnoremap <F3> :wa!
-nnoremap <F2> :!make all
 nnoremap <F1> :wa!
 let &cpo=s:cpo_save
 unlet s:cpo_save
@@ -32,7 +32,7 @@ set window=0
 let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
 let v:this_session=expand("<sfile>:p")
 silent only
-cd ~/work/git/John/fpganow/FIX
+cd ~/work/git/fpganow/FIX
 if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
@@ -40,7 +40,7 @@ set shortmess=aoO
 badd +2 createFix.py
 badd +4 ../Itch/createItch.py
 badd +110 ../Itch/Itch41.py
-badd +1 Fix42.py
+badd +19 Fix42.py
 badd +11 ../Itch/Itch41Tests.py
 badd +1 Fix42Tests.py
 badd +1 ~/.vimrc
@@ -57,8 +57,8 @@ set nosplitbelow
 set nosplitright
 wincmd t
 set winheight=1 winwidth=1
-exe '1resize ' . ((&lines * 12 + 23) / 46)
-exe '2resize ' . ((&lines * 31 + 23) / 46)
+exe '1resize ' . ((&lines * 23 + 25) / 50)
+exe '2resize ' . ((&lines * 24 + 25) / 50)
 argglobal
 setlocal noautoindent
 setlocal backupcopy=
@@ -161,11 +161,11 @@ setlocal nowinfixheight
 setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
-let s:l = 22 - ((3 * winheight(0) + 6) / 12)
+let s:l = 25 - ((16 * winheight(0) + 11) / 23)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-22
+25
 normal! 0
 wincmd w
 argglobal
@@ -271,15 +271,15 @@ setlocal nowinfixheight
 setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
-let s:l = 36 - ((12 * winheight(0) + 15) / 31)
+let s:l = 47 - ((12 * winheight(0) + 12) / 24)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-36
-normal! 025|
+47
+normal! 037|
 wincmd w
-exe '1resize ' . ((&lines * 12 + 23) / 46)
-exe '2resize ' . ((&lines * 31 + 23) / 46)
+exe '1resize ' . ((&lines * 23 + 25) / 50)
+exe '2resize ' . ((&lines * 24 + 25) / 50)
 tabnext 1
 if exists('s:wipebuf')
   silent exe 'bwipe ' . s:wipebuf
